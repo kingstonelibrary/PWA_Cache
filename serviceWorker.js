@@ -24,6 +24,7 @@ self.addEventListener('install', function(event) {
 
 // message時、登録リソースのキャッシュ
 self.addEventListener('message', function(event) {
+  caches.delete(CACHE_NAME);
   return install(event);
 });
 
