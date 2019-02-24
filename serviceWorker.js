@@ -37,6 +37,7 @@ self.addEventListener('activate', event => {
           return !CACHE_KEYS.includes(key);
         }).map(key => {
           // 不要なキャッシュを削除
+          console.log(key + 'を削除しました')
           return caches.delete(key);
         })
       );
