@@ -14,7 +14,7 @@ if ('serviceWorker' in navigator) {
  }
 
  const channel = new MessageChannel();
- var updateBtn = document.getElementsByClassName('updateBtn');
- updateBtn[0].addEventListener("click", function(){
+ var updateBtn = document.getElementById('updateBtn')
+ updateBtn.addEventListener("click", function(){
   navigator.serviceWorker.controller.postMessage('update', [channel.port2]);
  }, false);
