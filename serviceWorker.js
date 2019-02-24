@@ -26,7 +26,8 @@ self.addEventListener('install', function(event) {
 self.addEventListener('message', function(event) {
   console.log('gotten message & deleted cache!')
   caches.delete(CACHE_NAME);
-  return install(event);
+  // return install(event);       キャッシュ消去後、再キャッシュしたい時
+  return (null);              
 });
 
 // インストール（登録リソースのキャッシュ）
