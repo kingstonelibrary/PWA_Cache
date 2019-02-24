@@ -17,16 +17,29 @@ const CACHE_KEYS = [
   CACHE_NAME
 ];
 
+// インストール時、登録リソースのキャッシュ
 self.addEventListener('install', function(event) {
-    event.waitUntil(
-        caches.open(CACHE_NAME) // 上記で指定しているキャッシュ名
-          .then(
-          function(cache){
-              return cache.addAll(urlsToCache); // 指定したリソースをキャッシュへ追加
-              // 1つでも失敗したらService Workerのインストールはスキップされる
-          })
-    );
+  return install(event);
 });
+
+// message時、登録リソースのキャッシュ
+self.addEventListener('message', function(event) {
+  return install(event);
+});
+
+// インストール（登録リソースのキャッシュ）
+const install = (event) => {
+  return event.waitUntil(
+    caches.open(CACHE_NAME)                 // 上記で指定しているキャッシュ名
+      .then(
+      function(cache){
+          return cache.addAll(urlsToCache); // 指定したリソースをキャッシュへ追加
+      })                                    // 1つでも失敗したらService Workerのインストールはスキップされる
+      .catch(function(err) {
+        console.log(err);
+      })
+  );
+}
 
 //新しいバージョンのServiceWorkerが有効化されたとき
 self.addEventListener('activate', event => {
@@ -36,7 +49,7 @@ self.addEventListener('activate', event => {
         keys.filter(key => {
           return !CACHE_KEYS.includes(key);
         }).map(key => {
-          // 不要なキャッシュを削除
+          // 不要なキャッシュを削除 'activate'イベントなので次にサイトアクセスした時、削除が実行される
           console.log(key + 'を削除しました')
           return caches.delete(key);
         })
@@ -44,6 +57,7 @@ self.addEventListener('activate', event => {
     })
   );
 });
+
 
 self.addEventListener('fetch', function(event) {
   var online = navigator.onLine;
