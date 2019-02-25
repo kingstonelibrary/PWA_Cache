@@ -33,7 +33,7 @@ self.addEventListener('message', function(event) {
 // インストール（登録リソースのキャッシュ）
 const install = (event) => {
   return event.waitUntil(
-    caches.open(CACHE_NAME)                 // 上記で指定しているキャッシュ名
+    caches.open(CACHE_NAME)                 // 上記で指定しているキャッシュ名（まだなければ生成）
       .then(
       function(cache){
           return cache.addAll(urlsToCache); // 指定したリソースをキャッシュへ追加
@@ -44,8 +44,9 @@ const install = (event) => {
   );
 }
 
-//新しいバージョンのServiceWorkerが有効化されたとき
+//現行バージョンのServiceWorkerが有効化されたとき古いキャッシュがあれば削除する
 self.addEventListener('activate', event => {
+  console.log('enter activate handler')
   event.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(
