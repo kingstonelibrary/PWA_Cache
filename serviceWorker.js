@@ -1,4 +1,4 @@
-var CACHE_NAME  = "fb-cache-v8-32";
+var CACHE_NAME  = "fb-cache-v8-33";
 
 var urlsToCache = [
     "index.html",
@@ -59,6 +59,7 @@ self.addEventListener('activate', event => {
         })
       );
     })
+    self.clients.claim();
   );
 });
 
