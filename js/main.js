@@ -1,7 +1,7 @@
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('serviceWorker.js')
    .then( function (registration) {
-    registration.onupdatefound = function() {     // インスト時、SWの更新チェック
+    registration.onupdatefound = function() {
       console.log('アップデート発見！');
       if (typeof registration.update == 'function') {
         registration.update();       
