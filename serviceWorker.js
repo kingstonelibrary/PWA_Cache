@@ -59,7 +59,7 @@ self.addEventListener('activate', event => {
         })
       );
     })
-    self.clients.claim();
+    // self.clients.claim();   // active 状態になったらすぐにコントロールさせたい
   );
 });
 
