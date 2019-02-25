@@ -5,6 +5,7 @@ if ('serviceWorker' in navigator) {
       console.log('アップデート発見！');
       if (typeof registration.update == 'function') {
         registration.update();       
+        setTimeout("location.reload()",1000);
       }
     }
    })
