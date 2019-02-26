@@ -2,9 +2,10 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('serviceWorker.js')
    .then( function (registration) {
     registration.onupdatefound = function() {
-      // alert('アップデート発見!！');
+      alert('アップデート発見!！');
       if (typeof registration.update == 'function') {
-        registration.update();       
+        registration.update();
+        navigator.serviceWorker.controller.postMessage('update', [channel.port1]);
       }
     }
    })
