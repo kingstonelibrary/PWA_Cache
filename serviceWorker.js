@@ -19,6 +19,7 @@ const CACHE_KEYS = [
 
 // インストール時、登録リソースのキャッシュ
 self.addEventListener('install', function(event) {
+  event.waitUntil(PopulateResourcesInCacheStorage());
   return install(event);
 });
 
