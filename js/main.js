@@ -20,6 +20,6 @@ if ('serviceWorker' in navigator) {
   var updateBtn = document.getElementById('updateBtn')
   updateBtn.addEventListener("click", function(){
    navigator.serviceWorker.controller.postMessage('update', [channel.port2]);
-   setTimeout("location.reload()",1000);
+   setTimeout(location.reload(),1000);
   }, false);
 };
