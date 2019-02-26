@@ -6,6 +6,9 @@ if ('serviceWorker' in navigator) {
       if (typeof registration.update == 'function') {
         registration.update();
         navigator.serviceWorker.controller.postMessage('update', [channel.port1]);
+        console.log(location);
+        
+        setTimeout("location.reload()",1000);
       }
     }
    })
