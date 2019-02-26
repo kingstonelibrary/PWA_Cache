@@ -2,7 +2,7 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('serviceWorker.js')
    .then( function (registration) {
     registration.onupdatefound = function() {
-      console.log('アップデート発見！');
+      alert('アップデート発見！');
       if (typeof registration.update == 'function') {
         registration.update();       
         setTimeout("location.reload()",1000);
