@@ -2,11 +2,10 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('serviceWorker.js')
    .then( function (registration) {
     registration.onupdatefound = function() {
-      alert('アップデート発見!！');
+      alert('SWスクリプト内にアップデート発見!！');
       if (typeof registration.update == 'function') {
         registration.update();
         navigator.serviceWorker.controller.postMessage('update', [channel.port1]);
-        setTimeout("location.reload()",1000);
       }
     }
    })
@@ -20,6 +19,6 @@ if ('serviceWorker' in navigator) {
   var updateBtn = document.getElementById('updateBtn')
   updateBtn.addEventListener("click", function(){
    navigator.serviceWorker.controller.postMessage('update', [channel.port2]);
-   setTimeout("location.reload()",1000);
+  //  setTimeout("location.reload()",1000);
   }, false);
 };
