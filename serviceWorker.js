@@ -41,7 +41,6 @@ const install = (event) => {
       .catch(function(err) {
         console.log(err);
       })
-      selflf.skipWaiting()
   );
 }
 
