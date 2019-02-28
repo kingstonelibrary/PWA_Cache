@@ -3,7 +3,7 @@ if ('serviceWorker' in navigator) {
    .then( function (registration) {
      console.log('serviceWorker.register実行');
     registration.onupdatefound = function() {
-      alert('SWスクリプト内にアップデート発見!！');
+      alert('SWスクリプト内にアップデート発見!！SWにmessageをpost！');
       if (typeof registration.update == 'function') {
         registration.update();
         navigator.serviceWorker.controller.postMessage('update', [channel.port1]);

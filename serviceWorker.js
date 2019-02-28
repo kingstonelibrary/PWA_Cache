@@ -46,7 +46,8 @@ const install = (event) => {
 
 //現行バージョンのServiceWorkerが有効化されたとき古いキャッシュがあれば削除する
 self.addEventListener('activate', event => {
-  console.log('enter activate handler')
+  console.log('enter activate handler');
+  event.waitUntil(self.clients.claim());    // activate ですぐに新しいSWによるコントロールを開始する
   event.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(
