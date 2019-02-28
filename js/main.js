@@ -1,6 +1,7 @@
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('serviceWorker.js')
    .then( function (registration) {
+     console.log('serviceWorker.register実行');
     registration.onupdatefound = function() {
       alert('SWスクリプト内にアップデート発見!！');
       if (typeof registration.update == 'function') {

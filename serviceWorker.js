@@ -66,10 +66,11 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', function(event) {
   var online = navigator.onLine;
-
+  console.log('getting in fetch');
+  
   // ファイルパス ~/test.htmlにアクセスすると、このファイル自体は無いがServiceWorkerがResponseを作成して表示してくれる
   if (event.request.url.indexOf('test.html') != -1) {
-    return event.respondWith(new Response('任意のURLの内容をここで自由に返却できる'));
+    return event.respondWith(new Response('そのURLに対するメッセージをここで自由に返却できる'));
   }
 
   if(online){
@@ -82,18 +83,17 @@ self.addEventListener('fetch', function(event) {
         function (response) {
           if (response) {
             //オンラインでもローカルにキャッシュでリソースがあればそれを返す
-            //ここを無効にすればオンラインのときは常にオンラインリソースを取りに行き、その最新版をキャッシュにPUTする
+            //この return を無効にすればオンラインのときは常にオンラインリソースを取りに行き、
+            //その最新版をキャッシュにPUTする
             return response;
           }
           //request streem 1
           return fetch(event.request)
             .then(function(response){
-              //ローカルキャッシュになかったからネットワークから落とす
+              //ローカルキャッシュになかった OR キャッシュ探索を無効にしてたらネットワークから落とす
               //ネットワークから落とせてればここでリソースが返される
-
               // Responseはストリームなのでキャッシュで使用してしまうと、ブラウザの表示で不具合が起こる(っぽい)ので、複製したものを使う
               cloneResponse = response.clone();
-
               if(response){
                 if(response || response.status == 200){
                   console.log("正常にリソースを取得");
@@ -126,7 +126,7 @@ self.addEventListener('fetch', function(event) {
           if (response) {
             return response;
           }
-          //オフラインでキャッシュもなかったパターン
+          //オフラインでキャッシュもなかったパターン＝オフライン時専用ページを返す
           return caches.match("offline.html")
               .then(function(responseNodata)
               {
