@@ -1,4 +1,4 @@
-var CACHE_NAME  = "fb-cache-v8-53";
+var CACHE_NAME  = "fb-cache-v8-54";
 
 var urlsToCache = [
     "index.html",
