@@ -1,9 +1,9 @@
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('serviceWorker.js')
    .then( function (registration) {
-     console.log('serviceWorker.register実行');
+     console.log('serviceWorker.registerメソッド実行 in main js');
     registration.onupdatefound = function() {
-      alert('SWスクリプト内にアップデート発見!！SWにmessageをpost！');
+      alert('SWスクリプト内にアップデート発見!！SWにmessageをpost！ in main js');
       if (typeof registration.update == 'function') {
         registration.update();
         navigator.serviceWorker.controller.postMessage('update', [channel.port1]);

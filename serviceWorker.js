@@ -1,4 +1,4 @@
-var CACHE_NAME  = "fb-cache-v8-54";
+var CACHE_NAME  = "fb-cache-v8-55";
 
 var urlsToCache = [
     "index.html",
@@ -97,15 +97,15 @@ self.addEventListener('fetch', function(event) {
               cloneResponse = response.clone();
               if(response){
                 if(response || response.status == 200){
-                  console.log("正常にリソースを取得");
+                  console.log("正常にリソースを取得 in fetch");
                   caches.open(CACHE_NAME)
                     .then(function(cache)
                     {
-                      console.log("キャッシュへ保存");
+                      console.log("キャッシュへ保存 in fetch");
                       //初回表示でエラー起きているが致命的でないので保留
                       cache.put(event.request, cloneResponse)
                       .then(function(){
-                        console.log("保存完了");
+                        console.log("保存完了 in fetch");
                       });
                     });
                 }else{
