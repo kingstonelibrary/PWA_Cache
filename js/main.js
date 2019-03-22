@@ -6,7 +6,7 @@ if ('serviceWorker' in navigator) {
       alert('SWスクリプト内にアップデート発見!！SWにmessageをpost！ in main js');
       if (typeof registration.update == 'function') {
         registration.update();
-        navigator.serviceWorker.controller.postMessage('update', [channel.port1]);
+        navigator.serviceWorker.controller.postMessage('updateDesu!!', [channel.port1]);
         setTimeout(location.reload(),1000);
       }
     }
